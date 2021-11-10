@@ -25,15 +25,12 @@ public class Nodo {
     public int getDatito() {
         return datito;
     }
-
     public void setDatito(int datito) {
         this.datito = datito;
     }
-
     public Nodo getSiguiente() {
         return siguiente;
     }
-
     public void setSiguiente(Nodo siguiente) {
         this.siguiente = siguiente;
     }
