@@ -28,14 +28,19 @@ public class Lista { //Lista simplemente enlazada
         else{//Cuando la lista con nodos...
             //Se debe ir hasta el final de la lista
             //Usando temp se recorrerá nodo por nodo hasta llegar al final
-            Nodo temp = inicio;//Desde aqui se empieza
+            
+            
+            /*Nodo temp = inicio;//Desde aqui se empieza
             //while
             while(temp.getSiguiente() != null){//Mientras temp.siguiente != seguiremos avanzando nodo tras nodo
                 temp = temp.getSiguiente();//Se mueve temp al nodo siguiente
       
             }
-            temp.setSiguiente(nuevo);//Conectamos el nodo nuevo al final de la lista
+            temp.setSiguiente(nuevo);//Conectamos el nodo nuevo al final de la lista*/
             
+            //Agregar nodo al final de la lista
+            fin.setSiguiente(nuevo);
+            fin = nuevo; // Nos movemos hacia el final de la lista
         }
     }
     //Imprimir Lista
@@ -46,5 +51,49 @@ public class Lista { //Lista simplemente enlazada
                 System.out.print(temp.getDatito() + " - ");
                 temp = temp.getSiguiente();//Temo se mueve al siguiente nodo
             }
+    }
+    //Borrar la lista
+    public void clear(){
+        inicio = null;
+        fin = null;
+    }
+    
+    //Contar los nodos
+    public int length(){
+        int iCont = 0;
+        Nodo temp = inicio;//Desde aqui se empieza
+            //while
+            while(temp != null){//Mientras temp != seguiremos avanzando
+                iCont++;
+                temp = temp.getSiguiente();//Temo se mueve al siguiente nodo
+            }
+            return iCont;
+    }
+    
+    //La lista está vacía: True, con Nodos: False
+    public boolean isEmpty(){
+        //Verificacion
+        if(inicio == null)
+            return true;
+        else
+            return false;
+    }
+    
+    //Recuperar un valor de la lista
+    public int get(int pos) throws Exception{
+        //verificacion
+        if(isEmpty()){//Lista vacía
+            throw new Exception("No hay valores almacenados en la lista");
+        }else{//Posicion que no exista: Posicion negativa o que nos pasemos
+            //pos tiene que estar entre 0 y n-1 --> n es el tamaño (length)
+            if((pos < 0) || (pos >= length() ))//Si pod es menor a cero o por es mayor o igual a n
+              throw new Exception("Esa posicion no existe dentro de la lista");  
+        }
+     
+        Nodo temp = inicio;
+        for(int i = 0; i < pos ;i++){
+            temp = temp.getSiguiente();//Temo se mueve al siguiente nodo
+        }
+        return temp.getDatito();
     }
 }
