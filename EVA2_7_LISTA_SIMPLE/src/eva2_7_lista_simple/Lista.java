@@ -96,4 +96,23 @@ public class Lista { //Lista simplemente enlazada
         }
         return temp.getDatito();
     }
+    
+    public void insertAtBegining(Nodo nuevo){
+        nuevo.setSiguiente(inicio);
+        inicio = nuevo;
+    }
+    public void insertAt (int pos,Nodo nuevo){
+        //Validar
+        
+        //Situaciones
+        //Insertar al inicio
+        if(pos == 0){
+            insertAtBegining(nuevo);
+        }else{//Cualquier otro caso
+            Nodo temp = inicio;//Desde aqui se empieza
+            for (int i = 0; i<(pos-1); i++){
+                temp = temp.getSiguiente();//Mover temp al siguiente nodo
+            }
+    }
+    }
 }
