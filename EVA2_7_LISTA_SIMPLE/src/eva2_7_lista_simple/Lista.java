@@ -12,15 +12,17 @@ package eva2_7_lista_simple;
 public class Lista { //Lista simplemente enlazada
     private Nodo inicio;//Es el punto de incio y acceso a la lista
     private Nodo fin;
+    private int tama;
     
     public Lista(){
         inicio = null; //Lista vacia
         fin = null;
+        tama= 0;
     }
     
     //Agregar nodos
-    public void add(Nodo nuevo){
-        
+    public void add(int valor){//O(1)
+        Nodo nuevo = new Nodo(valor);
         if(inicio==null){
             inicio=nuevo; //Se conecta el primer nodo a la lista
             fin = nuevo;
@@ -42,9 +44,10 @@ public class Lista { //Lista simplemente enlazada
             fin.setSiguiente(nuevo);
             fin = nuevo; // Nos movemos hacia el final de la lista
         }
+        tama++;
     }
     //Imprimir Lista
-    public void printList(){
+    public void printList(){//O(N)
         Nodo temp = inicio;//Desde aqui se empieza
             //while
             while(temp != null){//Mientras temp != seguiremos avanzando
@@ -53,21 +56,23 @@ public class Lista { //Lista simplemente enlazada
             }
     }
     //Borrar la lista
-    public void clear(){
+    public void clear(){//O(1)
         inicio = null;
         fin = null;
+        tama=0;
     }
     
     //Contar los nodos
     public int length(){
-        int iCont = 0;
+        /*int iCont = 0;
         Nodo temp = inicio;//Desde aqui se empieza
             //while
             while(temp != null){//Mientras temp != seguiremos avanzando
                 iCont++;
                 temp = temp.getSiguiente();//Temo se mueve al siguiente nodo
             }
-            return iCont;
+            return iCont;*/
+            return tama;
     }
     
     //La lista está vacía: True, con Nodos: False
@@ -97,11 +102,12 @@ public class Lista { //Lista simplemente enlazada
         return temp.getDatito();
     }
     
-    public void insertAtBegining(Nodo nuevo){
+    private void insertAtBegining(Nodo nuevo){//O(1)
         nuevo.setSiguiente(inicio);
         inicio = nuevo;
     }
-    public void insertAt (int pos,Nodo nuevo){
+    public void insertAt (int pos,int valor){// O(N)
+        Nodo nuevo = new Nodo(valor);
         //Validar
         
         //Situaciones
@@ -113,6 +119,36 @@ public class Lista { //Lista simplemente enlazada
             for (int i = 0; i<(pos-1); i++){
                 temp = temp.getSiguiente();//Mover temp al siguiente nodo
             }
+            //Falta reconectar
+            //Primero conectamos el nievo nodo
+            nuevo.setSiguiente(temp.getSiguiente());
+            //Conectamos la lista al nuevo nodo
+            temp.setSiguiente(nuevo);
     }
+        tama++;
+    }
+    
+    public void deleteAt(int pos){// O(N)
+        int iTamaLista = length();//Se obtiene el tamaño de la lista
+        //Validar
+        if(iTamaLista == 1){
+            clear();
+        }
+        //Situaciones
+        if(pos == 0){//Borrar el nodo al inicio
+            inicio = inicio.getSiguiente();
+        }else{//Otros casos
+            //Movernos al nodo previo a la posicion
+            Nodo temp = inicio;
+            for (int i = 0; i<(pos-1); i++){
+                temp = temp.getSiguiente();//Mover temp al siguiente nodo
+            }
+            //Falta reconectar
+            temp.setSiguiente(temp.getSiguiente().getSiguiente());
+            if (pos == (iTamaLista -1))//Se verifica si es el ultimo nodo de la lista
+                fin = temp;
+    }
+        tama--;
+        
     }
 }
