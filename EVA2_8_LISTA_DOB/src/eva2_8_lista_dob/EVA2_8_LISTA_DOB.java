@@ -27,6 +27,13 @@ public class EVA2_8_LISTA_DOB {
         listaDoble.insertAt(0, 0);
         System.out.println("");
         System.out.println("Cantidad de Nodos: "+listaDoble.length());
+        listaDoble.printList();
+        System.out.println("");
+        listaDoble.DeleteAt(2);
+        listaDoble.printList();
+        listaDoble.insertAt(2, 4);
+        listaDoble.printList();
+        
     }
     
 }

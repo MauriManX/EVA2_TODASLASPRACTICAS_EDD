@@ -3,32 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eva2_8_lista_dob;
+package eva2_9_queue;
 
 /**
  *
  * @author Mauricio
  */
-public class ListaDoble { //Lista simplemente enlazada
+public class Lista { //Lista simplemente enlazada
     private Nodo inicio;//Es el punto de incio y acceso a la lista
     private Nodo fin;
     private int tama;
-
-    public ListaDoble() {
+    
+    public Lista(){
         inicio = null; //Lista vacia
         fin = null;
         tama= 0;
     }
     
-    public void add(int valor){
+    //Agregar nodos
+    public void add(int valor){//O(1)
         Nodo nuevo = new Nodo(valor);
-        if(inicio==null){ //Lista vacía
+        if(inicio==null){
             inicio=nuevo; //Se conecta el primer nodo a la lista
             fin = nuevo;
-        }else{//Lista con nodos
-            //Agregar un nodo al final de la lista
+        }
+        else{//Cuando la lista con nodos...
+            //Se debe ir hasta el final de la lista
+            //Usando temp se recorrerá nodo por nodo hasta llegar al final
+            
+            
+            /*Nodo temp = inicio;//Desde aqui se empieza
+            //while
+            while(temp.getSiguiente() != null){//Mientras temp.siguiente != seguiremos avanzando nodo tras nodo
+                temp = temp.getSiguiente();//Se mueve temp al nodo siguiente
+      
+            }
+            temp.setSiguiente(nuevo);//Conectamos el nodo nuevo al final de la lista*/
+            
+            //Agregar nodo al final de la lista
             fin.setSiguiente(nuevo);
-            nuevo.setPrevio(fin);
             fin = nuevo; // Nos movemos hacia el final de la lista
         }
         tama++;
@@ -42,15 +55,6 @@ public class ListaDoble { //Lista simplemente enlazada
                 temp = temp.getSiguiente();//Temo se mueve al siguiente nodo
             }
     }
-    //Tarea imprimir lista inversa
-    public void printInvertedList(){//O(N)
-        Nodo temp = fin;//Desde aqui se empieza
-            //while
-            while(temp != null){//Mientras temp != seguiremos avanzando
-                System.out.print(temp.getDatito() + " - ");
-                temp = temp.getPrevio();//Temo se mueve al siguiente nodo
-            }
-    }    
     //Borrar la lista
     public void clear(){//O(1)
         inicio = null;
@@ -100,11 +104,8 @@ public class ListaDoble { //Lista simplemente enlazada
     
     private void insertAtBegining(Nodo nuevo){//O(1)
         nuevo.setSiguiente(inicio);
-        inicio.setPrevio(nuevo);
-        
-        
+        inicio = nuevo;
     }
-    
     public void insertAt (int pos,int valor){// O(N)
         Nodo nuevo = new Nodo(valor);
         //Validar
@@ -115,21 +116,19 @@ public class ListaDoble { //Lista simplemente enlazada
             insertAtBegining(nuevo);
         }else{//Cualquier otro caso
             Nodo temp = inicio;//Desde aqui se empieza
-            for (int i = 0; i<pos; i++){
+            for (int i = 0; i<(pos-1); i++){
                 temp = temp.getSiguiente();//Mover temp al siguiente nodo
             }
             //Falta reconectar
             //Primero conectamos el nievo nodo
-            nuevo.setSiguiente(temp);
-            nuevo.setPrevio(temp.getPrevio());
+            nuevo.setSiguiente(temp.getSiguiente());
             //Conectamos la lista al nuevo nodo
-            temp.getPrevio().setSiguiente(nuevo);
-            temp.setPrevio(nuevo);
+            temp.setSiguiente(nuevo);
     }
         tama++;
     }
-    //Tarea DeleteAt, no salió bien :(
-    public void DeleteAt (int pos){// O(N)
+    
+    public void deleteAt(int pos){// O(N)
         int iTamaLista = length();//Se obtiene el tamaño de la lista
         //Validar
         if(iTamaLista == 1){
@@ -146,11 +145,11 @@ public class ListaDoble { //Lista simplemente enlazada
             }
             //Falta reconectar
             temp.setSiguiente(temp.getSiguiente().getSiguiente());
-            temp.getSiguiente().setPrevio(temp.getSiguiente().getPrevio().getPrevio());
             if (pos == (iTamaLista -1))//Se verifica si es el ultimo nodo de la lista
                 fin = temp;
     }
         tama--;
         
     }
+
 }
