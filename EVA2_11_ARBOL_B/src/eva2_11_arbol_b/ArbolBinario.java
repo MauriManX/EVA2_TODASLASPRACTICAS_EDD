@@ -50,11 +50,36 @@ public class ArbolBinario {
     }
     
     public void printPreOrder(){
-        
+        preOrder(root);//Se llama al metodo recursivo
     }
+    
     private void preOrder(Nodo actual){
         if(actual != null){
-            System.out.println("["+actual.getDatito()+"]");//Visit node
-        }
+            System.out.print("["+actual.getDatito()+"]");//Visit node
+            preOrder(actual.getIzquierda());//Traverse left subtree
+            preOrder(actual.getDerecha());//Traverse right subtree
+}
+ }
+    public void printInOrder(){
+        inOrder(root);//Se llama al metodo recursivo
     }
+    
+    private void inOrder(Nodo actual){
+        if(actual != null){
+            inOrder(actual.getIzquierda());//Traverse left subtree
+            System.out.print("["+actual.getDatito()+"]");//Visit node
+            inOrder(actual.getDerecha());//Traverse right subtree
+}
+ }
+    public void printPostOrder(){
+        postOrder(root);//Se llama al metodo recursivo
+    }
+    
+    private void postOrder(Nodo actual){
+        if(actual != null){
+            postOrder(actual.getIzquierda());//Traverse left subtree
+            postOrder(actual.getDerecha());//Traverse right subtree
+            System.out.print("["+actual.getDatito()+"]");//Visit node
+}
+ }
 }

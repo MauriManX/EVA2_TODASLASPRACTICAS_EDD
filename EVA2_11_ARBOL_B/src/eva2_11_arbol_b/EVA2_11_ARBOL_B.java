@@ -16,7 +16,21 @@ public class EVA2_11_ARBOL_B {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        ArbolBinario arbolB = new ArbolBinario();
+        arbolB.add(13);
+        arbolB.add(10);
+        arbolB.add(18);
+        arbolB.add(2);
+        arbolB.add(11);
+        arbolB.add(17);
+        arbolB.add(20);
+        arbolB.add(16);
+        System.out.println("Preorden");
+        arbolB.printPreOrder();
+        System.out.println("\nInorden");
+        arbolB.printInOrder();
+        System.out.println("\nPosorden");
+        arbolB.printPostOrder();
     }
     
 }
